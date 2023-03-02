@@ -63,6 +63,9 @@ public class Game extends JPanel {
 		if (ball.obstacleCreation <= -1200) {
 			obstacleNumber++;
 			createObstacle();
+			if(obstacles.size() >= 3) {
+				obstacles = obstacles.stream().skip(1).collect(Collectors.toCollection(ArrayList::new));
+			}
 			ball.obstacleCreation += 1200;
 		}
 		collision();
@@ -110,7 +113,6 @@ public class Game extends JPanel {
             index = (int) (Math.random() * 10);
         }
 		obstacles.add(new Obstacle(arrays.get(index), obstacleNumber * -1200, image, tileColor1, tileColor2));
-		System.out.println(obstacles);
 	}
 
 	public void getCSVFile() {

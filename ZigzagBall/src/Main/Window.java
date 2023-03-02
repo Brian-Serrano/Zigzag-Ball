@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.Color;
 import java.awt.Insets;
 
 import javax.swing.JFrame;
@@ -12,12 +13,14 @@ import Menu.Settings;
 import Util.Audio;
 import Util.Background;
 import Util.Image;
+import Util.ImageColorChanger;
 import Util.SaveResources;
 import Util.Variables;
 
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public Background background;
+	public SaveResources saveResources;
 	public Image image;
 	public Game game;
 	public Menu menu;
@@ -25,7 +28,6 @@ public class Window extends JFrame {
 	public Settings settings;
 	public Timer timer;
 	public Insets insets;
-	public SaveResources saveResources;
 	public Audio menuSound;
 	public Audio gameSound;
 	
@@ -37,8 +39,11 @@ public class Window extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.saveResources = new SaveResources();
 		this.saveResources.fetchResources();
-		this.background = new Background();
 		this.image = new Image();
+		ImageColorChanger.colorImage(image.slope, Variables.newObstacleColor, Color.WHITE);
+		ImageColorChanger.colorImage(image.blockOne,Variables.newObstacleColor, Color.WHITE);
+		ImageColorChanger.colorImage(image.blockTwo, Variables.newObstacleColor, Color.WHITE);
+		this.background = new Background();
 		this.game = new Game(image, background, saveResources);
 		this.menu = new Menu(image, background);
 		this.pause = new Pause(image, background, saveResources);
